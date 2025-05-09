@@ -1,7 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: [
-		"./src/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	theme: {
 		container: {
@@ -18,16 +20,8 @@ module.exports = {
 				ring: '#3b82f6',
 				background: '#ffffff',
 				foreground: '#111827',
-				primary: {
-					DEFAULT: '#3b82f6',
-					dark: '#1d4ed8',
-					light: '#60a5fa',
-				},
-				secondary: {
-					DEFAULT: '#1f2937',
-					dark: '#111827',im
-					light: '#374151',
-				},
+				primary: "#2563eb",
+				secondary: "#60a5fa",
 				destructive: {
 					DEFAULT: '#ef4444',
 					foreground: '#ffffff'
@@ -67,7 +61,8 @@ module.exports = {
 					github: '#171515',
 					linkedin: '#0077B5',
 					discord: '#5865F2',
-				}
+				},
+				text: "#222",
 			},
 			borderRadius: {
 				lg: '0.5rem',
@@ -134,7 +129,15 @@ module.exports = {
 					'75%': {
 						'border-radius': '40% 30% 70% 30% / 30% 40% 30% 60%'
 					},
-				}
+				},
+				fadeIn: {
+					"0%": { opacity: "0" },
+					"100%": { opacity: "1" },
+				},
+				slideUp: {
+					"0%": { transform: "translateY(20px)", opacity: "0" },
+					"100%": { transform: "translateY(0)", opacity: "1" },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -145,6 +148,8 @@ module.exports = {
 				'slide-in': 'slide-in 0.5s ease-out',
 				'shape-morph': 'shape-morph 8s ease-in-out infinite',
 				'float': 'float 6s ease-in-out infinite',
+				'fade-in': 'fadeIn 0.5s ease-in-out',
+				'slide-up': 'slideUp 0.5s ease-out',
 			}
 		}
 	},

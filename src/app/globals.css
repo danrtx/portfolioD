@@ -4,36 +4,32 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 17, 24, 39;
-  --background-end-rgb: 0, 0, 0;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-text font-poppins min-h-screen overflow-x-hidden;
+  }
 }
 
-html, body {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  color: #222;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+  }
 
-* {
-  box-sizing: inherit;
-}
+  .hover-card {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/20;
+  }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-    to bottom,
-    rgb(var(--background-start-rgb)),
-    rgb(var(--background-end-rgb))
-  );
-  min-height: 100vh;
+  .btn-primary {
+    @apply px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 border border-primary hover:bg-primary/10 rounded-lg transition-colors;
+  }
 }
 
 /* Custom scrollbar */
@@ -47,50 +43,14 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%);
-  border-radius: 8px;
-  min-height: 40px;
+  @apply bg-gradient-to-b from-primary to-secondary rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%);
+  @apply bg-gradient-to-b from-secondary to-primary;
 }
 
-/* Animations */
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Utility classes */
-.gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600;
-}
-
-.hover-card {
-  @apply transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20;
-}
-
-.btn-primary {
-  @apply px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors;
-}
-
-.btn-secondary {
-  @apply px-6 py-3 border border-blue-600 hover:bg-blue-600/10 rounded-lg transition-colors;
-}
-
-/* Firefox scrollbar */
+/* Para Firefox */
 html {
   scrollbar-width: thin;
   scrollbar-color: #60a5fa #eaf6ff;

@@ -1,13 +1,17 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import Navigation from '@/components/Navigation';
 
-const inter = Inter({ subsets: ['latin'] });
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-poppins',
+});
 
 export const metadata: Metadata = {
-  title: 'Danilo Montezuma - Portfolio',
-  description: 'Full Stack Developer Portfolio showcasing projects and skills',
+  title: 'Portfolio',
+  description: 'My professional portfolio',
 };
 
 export default function RootLayout({
@@ -17,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${poppins.variable} font-poppins`}>
         <Navigation />
         {children}
       </body>
