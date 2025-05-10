@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { FaInstagram, FaLinkedin, FaGithub, FaDiscord } from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaGithub, FaDiscord, FaSlack } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
 const socials = [
@@ -34,6 +34,14 @@ const socials = [
     color: "bg-[#5865F2]",
     icon: <FaDiscord size={64} className="opacity-90" />,
     url: "https://discord.com/users/dxl#0828",
+    text: "text-white"
+  },
+  {
+    name: "Slack",
+    user: "Danilo Andres Montezuma Ibarra",
+    color: "bg-gradient-to-br from-[#36C5F0] via-[#2EB67D] to-[#ECB22E]",
+    icon: <FaSlack size={64} className="opacity-90" />,
+    url: "https://slack.com",
     text: "text-white"
   },
 ];
