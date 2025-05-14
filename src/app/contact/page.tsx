@@ -25,8 +25,8 @@ export default function Contact() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white py-20">
-      <div className="container mx-auto px-4">
-        <motion.div
+      <section className="container mx-auto px-4">
+        <motion.article
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="max-w-2xl mx-auto"
@@ -34,7 +34,7 @@ export default function Contact() {
           <h1 className="text-4xl font-bold text-center mb-12">Get in Touch</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
+            <fieldset>
               <label htmlFor="name" className="block text-sm font-medium mb-2">
                 Name
               </label>
@@ -47,9 +47,9 @@ export default function Contact() {
                 className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-            </div>
+            </fieldset>
 
-            <div>
+            <fieldset>
               <label htmlFor="email" className="block text-sm font-medium mb-2">
                 Email
               </label>
@@ -62,9 +62,9 @@ export default function Contact() {
                 className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-            </div>
+            </fieldset>
 
-            <div>
+            <fieldset>
               <label htmlFor="message" className="block text-sm font-medium mb-2">
                 Message
               </label>
@@ -77,7 +77,7 @@ export default function Contact() {
                 className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-            </div>
+            </fieldset>
 
             <button
               type="submit"
@@ -87,9 +87,9 @@ export default function Contact() {
             </button>
           </form>
 
-          <div className="mt-12 text-center">
+          <footer className="mt-12 text-center">
             <h2 className="text-2xl font-bold mb-6">Connect with Me</h2>
-            <div className="flex justify-center gap-6">
+            <nav className="flex justify-center gap-6">
               <a
                 href="https://github.com"
                 target="_blank"
@@ -114,10 +114,10 @@ export default function Contact() {
               >
                 Twitter
               </a>
-            </div>
-          </div>
-        </motion.div>
-      </div>
+            </nav>
+          </footer>
+        </motion.article>
+      </section>
     </main>
   );
 } 

@@ -8,9 +8,9 @@ import { motion } from "framer-motion";
  */
 export default function DecorativeBackground() {
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 w-full h-full overflow-hidden">
+    <section className="pointer-events-none fixed inset-0 -z-10 w-full h-full overflow-hidden">
       {/* Blob grande superior izquierda */}
-      <motion.div
+      <motion.figure
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: [0.4, 0.5, 0.4],
@@ -26,7 +26,7 @@ export default function DecorativeBackground() {
       />
 
       {/* Blob mediano derecha */}
-      <motion.div
+      <motion.figure
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: [0.3, 0.4, 0.3],
@@ -43,7 +43,7 @@ export default function DecorativeBackground() {
       />
 
       {/* Círculo flotante central */}
-      <motion.div
+      <motion.figure
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ 
           opacity: [0.2, 0.3, 0.2],
@@ -59,7 +59,7 @@ export default function DecorativeBackground() {
       />
 
       {/* Rectángulos flotantes */}
-      <motion.div
+      <motion.figure
         initial={{ opacity: 0 }}
         animate={{ 
           opacity: [0.15, 0.25, 0.15],
@@ -75,7 +75,7 @@ export default function DecorativeBackground() {
         className="absolute bottom-32 left-1/4 w-40 h-20 bg-blue-400/30 rounded-2xl blur-2xl"
       />
 
-      <motion.div
+      <motion.figure
         initial={{ opacity: 0 }}
         animate={{ 
           opacity: [0.1, 0.2, 0.1],
@@ -90,6 +90,6 @@ export default function DecorativeBackground() {
         }}
         className="absolute top-32 right-1/4 w-32 h-32 bg-blue-500/20 rounded-2xl blur-2xl"
       />
-    </div>
+    </section>
   );
 } 

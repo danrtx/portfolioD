@@ -68,7 +68,7 @@ export default function SocialPage() {
   const [active, setActive] = useState<number | null>(null);
   return (
     <main className="w-screen h-screen flex items-stretch justify-stretch bg-blue-50 overflow-hidden">
-      <motion.div
+      <motion.nav
         className="flex w-full h-full"
         variants={containerVariants}
         initial="hidden"
@@ -78,7 +78,7 @@ export default function SocialPage() {
           const isActive = active === i;
           const flexValue = active === null ? 1 : isActive ? 3 : 0.7;
           return (
-            <motion.div
+            <motion.article
               key={s.name}
               className={`flex flex-col items-center justify-center cursor-pointer ${s.color} ${s.text}`}
               variants={itemVariants}
@@ -89,14 +89,14 @@ export default function SocialPage() {
               onMouseLeave={() => setActive(null)}
               onClick={() => window.open(s.url, "_blank")}
             >
-              <div className="flex flex-col items-center gap-4 select-none">
+              <figure className="flex flex-col items-center gap-4 select-none">
                 <span className="text-lg md:text-xl font-semibold mb-2">{s.user}</span>
                 {s.icon}
-              </div>
-            </motion.div>
+              </figure>
+            </motion.article>
           );
         })}
-      </motion.div>
+      </motion.nav>
     </main>
   );
 } 

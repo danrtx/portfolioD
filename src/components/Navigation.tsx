@@ -19,7 +19,7 @@ export default function Navigation() {
 
   return (
     <nav className="fixed top-6 left-1/2 z-50 -translate-x-1/2 w-[95vw] max-w-3xl flex justify-center">
-      <div
+      <nav
         className="backdrop-blur-xl bg-white/70 shadow-xl rounded-full flex items-center px-2 py-1 gap-1 transition-all duration-300 border border-blue-100/60"
         style={{ boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.15)" }}
       >
@@ -50,7 +50,7 @@ export default function Navigation() {
             </Link>
           );
         })}
-      </div>
+      </nav>
     </nav>
   );
 } 

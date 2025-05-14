@@ -41,13 +41,13 @@ export default function ReferencesPage() {
   return (
     <main className="min-h-screen w-full bg-blue-50 flex items-center justify-center relative overflow-hidden">
       {/* Difuminado de fondo tipo Projects */}
-      <div className="pointer-events-none fixed inset-0 -z-10 flex items-center justify-center">
-        <div className="w-[900px] h-[400px] bg-blue-200 rounded-full blur-[80px] opacity-60 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
-      </div>
+      <figure className="pointer-events-none fixed inset-0 -z-10 flex items-center justify-center">
+        <figure className="w-[900px] h-[400px] bg-blue-200 rounded-full blur-[80px] opacity-60 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+      </figure>
       {/* Blobs y decorativos de fondo (eliminados para dar protagonismo al difuminado) */}
 
       {/* Contenido principal */}
-      <div className="relative z-10 w-full max-w-6xl flex flex-col items-center justify-center gap-8 px-4 py-12">
+      <section className="relative z-10 w-full max-w-6xl flex flex-col items-center justify-center gap-8 px-4 py-12">
         {/* Título y subtítulo */}
         <motion.h1
           initial={{ opacity: 0, y: -30 }}
@@ -66,16 +66,16 @@ export default function ReferencesPage() {
           Personas que han trabajado conmigo y pueden dar fe de mi ética, profesionalismo y dedicación.
         </motion.p>
         {/* Grid principal */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <article className="w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           {/* Columna izquierda: Dropdown y testimonio en tarjeta */}
-          <motion.div
+          <motion.section
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
             className="flex flex-col items-center md:items-start gap-8"
           >
             {/* Dropdown de referentes flotante */}
-            <div className="relative w-full max-w-xs mb-4">
+            <nav className="relative w-full max-w-xs mb-4">
               <button
                 className="w-full px-6 py-3 border border-black rounded-full text-base font-medium bg-white/90 flex items-center gap-2 shadow focus:outline-none focus:ring-2 focus:ring-blue-400"
                 onClick={() => setDropdown((d) => !d)}
@@ -118,9 +118,9 @@ export default function ReferencesPage() {
                   </motion.ul>
                 )}
               </AnimatePresence>
-            </div>
+            </nav>
             {/* Testimonio y contacto en tarjeta */}
-            <motion.div
+            <motion.article
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
@@ -141,40 +141,40 @@ export default function ReferencesPage() {
                   <span key={idx} className="block">{line.trim()}</span>
                 ))}
               </motion.p>
-              <motion.div
+              <motion.address
                 key={ref.email}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
-                className="text-base text-blue-800 text-center"
+                className="text-base text-blue-800 text-center not-italic"
               >
-                <div className="mb-1">Phone: {ref.phone}</div>
-                <div>Email: {ref.email}</div>
-              </motion.div>
-            </motion.div>
-          </motion.div>
+                <p className="mb-1">Phone: {ref.phone}</p>
+                <p>Email: {ref.email}</p>
+              </motion.address>
+            </motion.article>
+          </motion.section>
           {/* Columna derecha: Avatar sobre blob */}
-          <motion.div
+          <motion.figure
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
             className="flex flex-col items-center justify-center relative min-h-[350px] py-8"
           >
-            <div className="relative flex flex-col items-center justify-center w-full h-full">
+            <figure className="relative flex flex-col items-center justify-center w-full h-full">
               {/* Avatar grande centrado sobre el blob */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-white/90 rounded-full shadow-2xl border-4 border-blue-200 flex items-center justify-center overflow-hidden z-10">
+              <figure className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-white/90 rounded-full shadow-2xl border-4 border-blue-200 flex items-center justify-center overflow-hidden z-10">
                 {ref.avatar ? (
                   <img src={ref.avatar} alt={ref.name} className="w-full h-full object-cover rounded-full" />
                 ) : (
                   <span className="text-blue-400 text-6xl font-bold">?</span>
                 )}
-              </div>
-            </div>
-          </motion.div>
-        </div>
+              </figure>
+            </figure>
+          </motion.figure>
+        </article>
         {/* Divisor decorativo */}
-        <div className="w-full h-1 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200 rounded-full my-10 opacity-60" />
-      </div>
+        <hr className="w-full h-1 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200 rounded-full my-10 opacity-60" />
+      </section>
     </main>
   );
 } 
