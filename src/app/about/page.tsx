@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 
 const skills = [
-  { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
-  { category: "Backend", items: ["Node.js", "Express", "MongoDB", "PostgreSQL"] },
-  { category: "Tools", items: ["Git", "Docker", "AWS", "Figma"] }
+  { category: "Tecnologías", items: [
+    "JavaScript", "ReactJS", "Tailwind", "TypeScript", "HTML", "Next.js", "Vite", "SQL"
+  ] },
+  { category: "Tools", items: ["Git", "Figma", "Visual Paradigm"] }
 ];
 
 export default function About() {
@@ -57,7 +58,7 @@ export default function About() {
       </motion.div>
 
       {/* Contenido principal */}
-      <div className="relative z-10 w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-12 min-h-[60vh] px-4 py-12">
+      <div className="relative z-10 w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-12 min-h-[60vh] px-4 py-12 mt-8">
         {/* Box circular/distorsionada para el texto */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
@@ -66,20 +67,24 @@ export default function About() {
           className="flex-1 flex items-center justify-center"
         >
           <div
-            className="w-full max-w-xl bg-white/80 shadow-2xl border border-blue-100 px-10 py-12 flex flex-col items-center md:items-start gap-6 backdrop-blur-md"
+            className="w-full max-w-3xl bg-white/70 shadow-xl border border-blue-200 px-8 py-10 flex flex-col items-center md:items-start gap-6 backdrop-blur-lg"
             style={{
-              borderRadius: '120px 120px 180px 120px / 120px 120px 120px 180px',
-              minHeight: 320,
+              borderRadius: '2.5rem',
+              minHeight: 340,
+              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+              border: '1.5px solid #c7d2fe',
+              background: 'rgba(255,255,255,0.7)',
+              backdropFilter: 'blur(12px)',
             }}
           >
-            <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-1 text-center md:text-left">About me</h1>
-            <h2 className="text-lg md:text-xl text-blue-700 mb-2 text-center md:text-left font-semibold">Full Stack Developer & Student</h2>
+            <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-1 text-center md:text-left">Sobre mí</h1>
+            <h2 className="text-lg md:text-xl text-blue-700 mb-2 text-center md:text-left font-semibold">Desarrollador Full Stack & Estudiante</h2>
             <p className="text-base md:text-lg text-gray-800 text-center md:text-left">
-              Hi! I'm Danilo Montezuma, a passionate software engineer in progress currently in my fifth semester of studies. I'm driven by curiosity, creativity, and the challenge of solving real-world problems through code. As I continue building my skills and knowledge, I enjoy exploring areas like web development, software architecture, and user-centered design.
+              ¡Hola! Soy Danilo Montezuma, un apasionado ingeniero de software en formación, actualmente en mi quinto semestre de estudios. Me motiva la curiosidad, la creatividad y el reto de resolver problemas reales a través del código. Mientras continúo construyendo mis habilidades y conocimientos, disfruto explorando áreas como el desarrollo web, la arquitectura de software y el diseño centrado en el usuario.
             </p>
             {/* Skills/intereses */}
             <div className="w-full mt-4">
-              <h3 className="text-base font-semibold text-blue-800 mb-2">Skills & Interests</h3>
+              <h3 className="text-base font-semibold text-blue-800 mb-2">Tecnologías y Herramientas</h3>
               <div className="flex flex-wrap gap-3">
                 {skills.map((group, idx) => (
                   <div key={group.category} className="flex flex-col items-center md:items-start">

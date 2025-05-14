@@ -1,24 +1,50 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { FaJs, FaReact } from "react-icons/fa";
-import { SiTailwindcss, SiTypescript } from "react-icons/si";
-import { motion } from "framer-motion";
+import { SiTailwindcss, SiTypescript, SiHtml5, SiNextdotjs, SiVite, SiMysql } from "react-icons/si";
+import { motion, AnimatePresence } from "framer-motion";
 
 const techs = [
   { icon: <FaJs size={64} className="text-yellow-400" />, name: "JavaScript" },
   { icon: <FaReact size={64} className="text-blue-400" />, name: "ReactJS" },
   { icon: <SiTailwindcss size={64} className="text-cyan-400" />, name: "Tailwind" },
   { icon: <SiTypescript size={64} className="text-blue-600" />, name: "TypeScript" },
+  { icon: <SiHtml5 size={64} className="text-orange-500" />, name: "HTML" },
+  { icon: <SiNextdotjs size={64} style={{ color: '#111' }} />, name: "Next.js" },
+  { icon: <SiVite size={64} className="text-purple-500" />, name: "Vite" },
+  { icon: <SiMysql size={64} className="text-blue-700" />, name: "SQL" },
 ];
 
 export default function Home() {
   const [index, setIndex] = useState(0);
   const [hoveredTech, setHoveredTech] = useState<number | null>(null);
-  const showTechs = techs.slice(index, index + 3);
+  const showTechs = techs.slice(index, index + 4);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const autoScrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  // Cambio automático de página
+  useEffect(() => {
+    if (autoScrollTimeout.current) clearTimeout(autoScrollTimeout.current);
+    autoScrollTimeout.current = setTimeout(() => {
+      const totalPages = Math.ceil(techs.length / 4);
+      const currentPage = Math.floor(index / 4);
+      const nextPage = (currentPage + 1) % totalPages;
+      setIndex(nextPage * 4);
+    }, 3000);
+    return () => {
+      if (autoScrollTimeout.current) clearTimeout(autoScrollTimeout.current);
+    };
+  }, [index, techs.length]);
+
+  // Handler para interacción del usuario (reinicia temporizador)
+  const handleUserInteraction = (cb: () => void) => {
+    if (autoScrollTimeout.current) clearTimeout(autoScrollTimeout.current);
+    cb();
+  };
 
   const prev = () => setIndex((i) => (i === 0 ? 0 : i - 1));
-  const next = () => setIndex((i) => (i + 3 >= techs.length ? i : i + 1));
+  const next = () => setIndex((i) => (i + 4 >= techs.length ? i : i + 1));
 
   return (
     <main className="min-h-screen w-full flex flex-col items-center justify-start bg-gradient-to-br from-blue-100 via-blue-50 to-blue-200">
@@ -44,7 +70,7 @@ export default function Home() {
             transition={{ delay: 0.4, duration: 0.7 }}
             className="text-xl text-gray-700 mb-2 font-inter"
           >
-            Software engineer
+            Ingeniero de software
           </motion.p>
           <motion.p
             initial={{ opacity: 0, x: -40 }}
@@ -60,7 +86,7 @@ export default function Home() {
               className="rounded-full px-6 py-2 bg-blue-200 hover:bg-blue-300 text-black font-semibold shadow flex items-center gap-2 transition-all duration-200 focus:outline-none"
             >
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path fill="#2563eb" d="M12 2C6.477 2 2 6.477 2 12c0 5.523 4.477 10 10 10s10-4.477 10-10C22 6.477 17.523 2 12 2Zm0 18c-4.418 0-8-3.582-8-8 0-1.657.672-3.156 1.757-4.243l10.486 10.486A7.963 7.963 0 0 1 12 20Zm6.243-3.757L7.757 5.757A7.963 7.963 0 0 1 12 4c4.418 0 8 3.582 8 8 0 1.657-.672 3.156-1.757 4.243Z"/></svg>
-              Social
+              Redes sociales
             </motion.button>
           </Link>
         </article>
@@ -84,83 +110,113 @@ export default function Home() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7, duration: 0.7 }}
-        className="w-full flex justify-center"
+        className="w-full flex flex-col items-center"
       >
-        <nav className="flex items-center bg-blue-100 rounded-full px-6 py-4 shadow-lg max-w-3xl w-full">
-          <button onClick={prev} className="focus:outline-none text-3xl text-blue-400 hover:text-blue-600 transition disabled:opacity-30" disabled={index === 0}>
-            &#8592;
-          </button>
-          <ul className="flex-1 flex justify-center gap-8">
-            {showTechs.map((tech, i) => (
-              <li
-                key={i}
-                className="flex flex-col items-center relative group"
-                onMouseEnter={() => setHoveredTech(i)}
-                onMouseLeave={() => setHoveredTech(null)}
+        <nav
+          ref={carouselRef}
+          className="flex items-center bg-blue-100 rounded-full px-6 py-4 shadow-lg max-w-3xl w-full"
+          onWheel={e => {
+            e.preventDefault();
+            handleUserInteraction(() => {
+              if (e.deltaY > 0 || e.deltaX > 0) {
+                if (index + 4 < techs.length) setIndex(index + 1);
+              } else if (e.deltaY < 0 || e.deltaX < 0) {
+                if (index > 0) setIndex(index - 1);
+              }
+            });
+          }}
+          style={{ cursor: 'grab' }}
+        >
+          <div className="flex-1 flex justify-center gap-8 relative min-h-[120px] w-full">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.ul
+                key={index}
+                className="flex justify-center gap-8 w-full"
+                initial={{ opacity: 0, x: 60 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -60 }}
+                transition={{ duration: 0.5, ease: 'easeInOut' }}
               >
-                <motion.figure
-                  whileHover={{ scale: 1.12 }}
-                  className="w-20 h-20 flex items-center justify-center rounded-full bg-white shadow-md mb-2 transition-all duration-200"
-                >
-                  {tech.icon}
-                </motion.figure>
-                <span className="text-sm font-medium text-gray-700">{tech.name}</span>
-                {/* Tooltip */}
-                {hoveredTech === i && (
-                  <motion.aside
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute -top-10 left-1/2 -translate-x-1/2 bg-blue-700 text-white text-xs rounded px-3 py-1 shadow-lg z-10"
+                {showTechs.map((tech, i) => (
+                  <li
+                    key={i}
+                    className="flex flex-col items-center relative group"
+                    onMouseEnter={() => setHoveredTech(i)}
+                    onMouseLeave={() => setHoveredTech(null)}
                   >
-                    {tech.name}
-                  </motion.aside>
-                )}
-              </li>
-            ))}
-          </ul>
-          <button onClick={next} className="focus:outline-none text-3xl text-blue-400 hover:text-blue-600 transition disabled:opacity-30" disabled={index + 3 >= techs.length}>
-            &#8594;
-          </button>
+                    <motion.figure
+                      whileHover={{ scale: 1.12 }}
+                      className="w-20 h-20 flex items-center justify-center rounded-full bg-white shadow-md mb-2 transition-all duration-200"
+                    >
+                      {tech.icon}
+                    </motion.figure>
+                    <span className="text-sm font-medium text-gray-700">{tech.name}</span>
+                    {/* Tooltip */}
+                    {hoveredTech === i && (
+                      <motion.aside
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute -top-10 left-1/2 -translate-x-1/2 bg-blue-700 text-white text-xs rounded px-3 py-1 shadow-lg z-10"
+                      >
+                        {tech.name}
+                      </motion.aside>
+                    )}
+                  </li>
+                ))}
+              </motion.ul>
+            </AnimatePresence>
+          </div>
         </nav>
+        {/* Puntos indicadores debajo del carousel */}
+        <div className="flex justify-center mt-4 gap-2">
+          {[...Array(Math.ceil(techs.length / 4))].map((_, pageIdx) => (
+            <button
+              key={pageIdx}
+              onClick={() => handleUserInteraction(() => setIndex(pageIdx * 4))}
+              className={`w-3 h-3 rounded-full transition-all duration-200 ${index === pageIdx * 4 ? 'bg-blue-600 scale-125' : 'bg-blue-300 hover:bg-blue-400'}`}
+              aria-label={`Ir a la página ${pageIdx + 1}`}
+            />
+          ))}
+        </div>
       </motion.section>
-      <section className="mt-12 w-full max-w-5xl px-6">
-        <h2 className="text-xl font-semibold text-black mb-6">Features</h2>
+      <section className="mt-12 w-full max-w-5xl px-6 pb-32">
+        <h2 className="text-xl font-semibold text-black mb-6">Características</h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {/* Feature 1 */}
           <li className="bg-white/90 rounded-2xl shadow-md p-6 flex flex-col items-center transition-transform duration-200 hover:-translate-y-2 hover:shadow-xl border border-blue-100">
             <span className="text-4xl mb-3 text-blue-500">🛠️</span>
-            <h3 className="font-bold text-lg text-blue-900 mb-1">Responsive Design</h3>
+            <h3 className="font-bold text-lg text-blue-900 mb-1">Diseño responsivo</h3>
             <p className="text-gray-600 text-center text-sm">Se adapta perfectamente a cualquier dispositivo y tamaño de pantalla.</p>
           </li>
           {/* Feature 2 */}
           <li className="bg-white/90 rounded-2xl shadow-md p-6 flex flex-col items-center transition-transform duration-200 hover:-translate-y-2 hover:shadow-xl border border-blue-100">
             <span className="text-4xl mb-3 text-yellow-400">⚡</span>
-            <h3 className="font-bold text-lg text-blue-900 mb-1">Fast Performance</h3>
+            <h3 className="font-bold text-lg text-blue-900 mb-1">Alto rendimiento</h3>
             <p className="text-gray-600 text-center text-sm">Carga rápida y optimización para una experiencia fluida.</p>
           </li>
           {/* Feature 3 */}
           <li className="bg-white/90 rounded-2xl shadow-md p-6 flex flex-col items-center transition-transform duration-200 hover:-translate-y-2 hover:shadow-xl border border-blue-100">
             <span className="text-4xl mb-3 text-green-500">🔒</span>
-            <h3 className="font-bold text-lg text-blue-900 mb-1">Secure</h3>
+            <h3 className="font-bold text-lg text-blue-900 mb-1">Seguro</h3>
             <p className="text-gray-600 text-center text-sm">Buenas prácticas de seguridad y protección de datos.</p>
           </li>
           {/* Feature 4 */}
           <li className="bg-white/90 rounded-2xl shadow-md p-6 flex flex-col items-center transition-transform duration-200 hover:-translate-y-2 hover:shadow-xl border border-blue-100">
             <span className="text-4xl mb-3 text-pink-400">🎨</span>
-            <h3 className="font-bold text-lg text-blue-900 mb-1">Modern UI</h3>
+            <h3 className="font-bold text-lg text-blue-900 mb-1">Interfaz moderna</h3>
             <p className="text-gray-600 text-center text-sm">Interfaz atractiva, minimalista y fácil de usar.</p>
           </li>
           {/* Feature 5 */}
           <li className="bg-white/90 rounded-2xl shadow-md p-6 flex flex-col items-center transition-transform duration-200 hover:-translate-y-2 hover:shadow-xl border border-blue-100">
             <span className="text-4xl mb-3 text-indigo-500">🔗</span>
-            <h3 className="font-bold text-lg text-blue-900 mb-1">Integrations</h3>
+            <h3 className="font-bold text-lg text-blue-900 mb-1">Integraciones</h3>
             <p className="text-gray-600 text-center text-sm">Fácil integración con APIs y servicios externos.</p>
           </li>
           {/* Feature 6 */}
           <li className="bg-white/90 rounded-2xl shadow-md p-6 flex flex-col items-center transition-transform duration-200 hover:-translate-y-2 hover:shadow-xl border border-blue-100">
             <span className="text-4xl mb-3 text-cyan-500">💡</span>
-            <h3 className="font-bold text-lg text-blue-900 mb-1">Innovative</h3>
+            <h3 className="font-bold text-lg text-blue-900 mb-1">Innovador</h3>
             <p className="text-gray-600 text-center text-sm">Soluciones creativas y tecnología de vanguardia.</p>
           </li>
         </ul>

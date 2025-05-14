@@ -9,7 +9,7 @@ const projects = [
     name: "Cambridge Academy",
     description: "My first professional project; Cambridge Academy of Languages, made with React JS",
     preview: "https://react-portfolio-preview.vercel.app/cambridge.png",
-    vercel: "https://cambridge-academy.vercel.app/",
+    vercel: "https://cambridgev.vercel.app/",
     tech: ["React", "CSS", "Vercel"],
     thumb: "https://react-portfolio-preview.vercel.app/cambridge.png"
   },
@@ -65,26 +65,40 @@ export default function ProjectsPage() {
               )}
             </AnimatePresence>
             {projects.map((p, i) => (
-              <motion.button
-                key={p.name}
-                onClick={() => setSelected(i)}
-                className={`relative flex items-center gap-4 px-6 py-5 rounded-2xl font-medium transition-all duration-200 z-10 text-lg
-                  ${selected === i ? "text-blue-900 scale-105" : "bg-white/70 text-black hover:bg-blue-200 hover:scale-105 shadow-lg"}
-                  backdrop-blur-md border border-blue-100`}
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                <img src={p.thumb} alt={p.name} className="w-12 h-12 object-cover rounded-xl shadow border border-blue-100" />
-                <article className="flex flex-col items-start">
-                  <span className="font-semibold flex items-center gap-2">{p.name} {selected === i && <FaStar className="text-blue-700" />}</span>
-                  <ul className="flex gap-1 mt-1">
-                    {p.tech.map((t) => (
-                      <li key={t} className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-semibold shadow-sm border border-blue-200">{t}</li>
-                    ))}
-                  </ul>
-                </article>
-              </motion.button>
+              <div key={p.name} className="relative">
+                <motion.button
+                  onClick={() => setSelected(i)}
+                  className={`relative flex items-center gap-4 px-6 py-5 rounded-2xl font-medium transition-all duration-200 z-10 text-lg w-full
+                    ${selected === i ? "text-blue-900 scale-105" : "bg-white/70 text-black hover:bg-blue-200 hover:scale-105 shadow-lg"}
+                    backdrop-blur-md border border-blue-100`}
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <article className="flex flex-col items-start">
+                    <span className="font-semibold flex items-center gap-2">{p.name} {selected === i && <FaStar className="text-blue-700" />}</span>
+                    <ul className="flex gap-1 mt-1">
+                      {p.tech.map((t) => (
+                        <li key={t} className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-semibold shadow-sm border border-blue-200">{t}</li>
+                      ))}
+                    </ul>
+                  </article>
+                </motion.button>
+                <AnimatePresence>
+                  {selected === i && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="bg-white/90 border border-blue-100 rounded-b-2xl shadow px-6 py-4 text-gray-800 text-sm overflow-hidden"
+                    >
+                      <div className="font-semibold text-blue-900 mb-1">Acerca del proyecto</div>
+                      <div>{p.description}</div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ))}
           </nav>
           {/* Preview y detalles */}
@@ -111,46 +125,35 @@ export default function ProjectsPage() {
               ) : (
                 <motion.article
                   key={projects[selected].name}
-                  className="flex flex-col md:flex-row gap-12 items-center w-full"
+                  className="flex flex-col items-center w-full"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.5 }}
                 >
-                  {/* Descripción */}
-                  <motion.article
-                    className="bg-white/70 backdrop-blur-md rounded-3xl p-10 shadow-2xl max-w-md w-full min-h-[180px] flex items-center justify-center border border-blue-100"
-                    initial={{ x: -40, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.1, duration: 0.5 }}
-                  >
-                    <span className="text-black text-lg font-medium text-center">{projects[selected].description}</span>
-                  </motion.article>
-                  {/* Preview */}
                   <motion.figure
-                    className="relative"
+                    className="relative flex flex-col items-center justify-center w-full md:w-[520px]"
                     initial={{ x: 40, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: 0.2, duration: 0.5 }}
                   >
+                    {projects[selected].name === "Cambridge Academy" ? (
+                      <div className="w-full flex justify-center max-w-5xl h-[400px] rounded-2xl overflow-auto border-4 border-blue-200 shadow-xl mb-4 bg-[#181a1b]">
+                        <iframe
+                          src="https://cambridgev.vercel.app/"
+                          title="Cambridge Academy Live Preview"
+                          width="1440"
+                          height="900"
+                          style={{ border: 'none', minWidth: '1440px', minHeight: '900px', display: 'block', margin: 'auto' }}
+                          allowFullScreen
+                        />
+                      </div>
+                    ) : null}
                     <a
                       href={projects[selected].vercel}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block rounded-3xl overflow-hidden shadow-2xl border-4 border-blue-200 bg-black"
-                      style={{ minWidth: 420, minHeight: 320 }}
-                    >
-                      <img
-                        src={projects[selected].preview}
-                        alt={projects[selected].name}
-                        className="object-cover w-full h-80 md:h-96 rounded-2xl"
-                      />
-                    </a>
-                    <a
-                      href={projects[selected].vercel}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="absolute left-1/2 -bottom-8 -translate-x-1/2 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center gap-2 text-lg font-semibold transition-all duration-200 border-2 border-white"
+                      className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center gap-2 text-lg font-semibold transition-all duration-200 border-2 border-white"
                     >
                       <FaExternalLinkAlt className="mr-2" /> Preview on Vercel
                     </a>
