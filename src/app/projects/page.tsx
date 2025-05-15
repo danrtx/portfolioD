@@ -48,12 +48,12 @@ export default function ProjectsPage() {
     <>
       <DecorativeBackground />
       <motion.div
-        className="min-h-screen bg-gradient-to-br from-blue-100 via-blue-50 to-blue-200 flex flex-col items-center py-8 md:py-12 pt-24"
+        className="min-h-screen bg-gradient-to-br from-blue-100 via-blue-50 to-blue-200 flex flex-col items-center py-8 md:py-12 pt-32"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
       >
-        <h1 className="text-3xl md:text-5xl font-bold text-black mb-8 md:mb-12 font-poppins text-center">
+        <h1 className="mt-8 text-3xl md:text-5xl font-bold text-black mb-8 md:mb-12 font-poppins text-center">
           Projects and experience
         </h1>
         <section className="flex flex-col lg:flex-row w-full max-w-6xl gap-8 md:gap-12 px-4 md:px-8">
