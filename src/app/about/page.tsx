@@ -58,16 +58,16 @@ export default function About() {
       </motion.div>
 
       {/* Contenido principal */}
-      <div className="relative z-10 w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-12 min-h-[60vh] px-4 py-12 mt-8">
+      <div className="relative z-10 w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 min-h-[60vh] px-4 md:px-8 py-8 md:py-12 mt-8">
         {/* Box circular/distorsionada para el texto */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
-          className="flex-1 flex items-center justify-center"
+          className="flex-1 flex items-center justify-center w-full"
         >
           <div
-            className="w-full max-w-3xl bg-white/70 shadow-xl border border-blue-200 px-8 py-10 flex flex-col items-center md:items-start gap-6 backdrop-blur-lg"
+            className="w-full max-w-3xl bg-white/70 shadow-xl border border-blue-200 px-4 md:px-8 py-8 md:py-10 flex flex-col items-center md:items-start gap-6 backdrop-blur-lg"
             style={{
               borderRadius: '2.5rem',
               minHeight: 340,
@@ -85,7 +85,7 @@ export default function About() {
             {/* Skills/intereses */}
             <div className="w-full mt-4">
               <h3 className="text-base font-semibold text-blue-800 mb-2">Tecnologías y Herramientas</h3>
-              <div className="flex flex-wrap gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {skills.map((group, idx) => (
                   <div key={group.category} className="flex flex-col items-center md:items-start">
                     <span className="text-xs font-bold text-blue-500 mb-1 uppercase tracking-wider">{group.category}</span>
@@ -108,13 +108,23 @@ export default function About() {
             </div>
           </div>
         </motion.div>
-        {/* Figura para la foto al lado */}
-        <div className="flex-1 flex items-center justify-center">
-          <div className="w-56 h-56 bg-white/90 rounded-full shadow-2xl border-4 border-blue-200 flex items-center justify-center overflow-hidden">
-            {/* Cuando tengas tu foto, reemplaza el span por <img src='/ruta.jpg' ... /> */}
-            <span className="text-blue-400 text-7xl font-bold">:)</span>
+        {/* Foto responsive */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex-1 flex items-center justify-center w-full mt-8 md:mt-0"
+        >
+          <div className="relative w-48 h-48 md:w-72 md:h-72 flex items-center justify-center">
+            {/* Fondo decorativo detrás */}
+            <div className="absolute w-52 h-52 md:w-80 md:h-80 bg-blue-300 rounded-full blur-xl -z-10" />
+            {/* Foto principal */}
+            <div className="relative w-48 h-48 md:w-72 md:h-72 bg-white rounded-full overflow-hidden shadow-xl flex items-center justify-center">
+              {/* <img src='/ruta.jpg' ... /> */}
+              <span className="text-blue-400 text-5xl md:text-7xl font-bold flex items-center justify-center h-full">:)</span>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </main>
   );

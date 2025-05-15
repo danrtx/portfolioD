@@ -67,20 +67,20 @@ const itemVariants = {
 export default function SocialPage() {
   const [active, setActive] = useState<number | null>(null);
   return (
-    <main className="w-screen h-screen flex items-stretch justify-stretch bg-blue-50 overflow-hidden">
+    <main className="w-screen h-screen flex flex-col sm:flex-row items-stretch justify-stretch bg-blue-50 overflow-hidden">
       <motion.nav
-        className="flex w-full h-full"
+        className="flex w-full h-full flex-col sm:flex-row"
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
         {socials.map((s, i) => {
           const isActive = active === i;
-          const flexValue = active === null ? 1 : isActive ? 3 : 0.7;
+          const flexValue = active === null ? 1 : isActive ? (window.innerWidth < 640 ? 1.2 : 3) : (window.innerWidth < 640 ? 0.9 : 0.7);
           return (
             <motion.article
               key={s.name}
-              className={`flex flex-col items-center justify-center cursor-pointer ${s.color} ${s.text}`}
+              className={`flex flex-col items-center justify-center cursor-pointer ${s.color} ${s.text} w-full sm:w-auto min-h-[120px] sm:min-h-0 py-8 sm:py-0`}
               variants={itemVariants}
               animate={{ flex: flexValue }}
               transition={{ type: "spring", stiffness: 80, damping: 18, duration: 0.5 }}
@@ -89,9 +89,9 @@ export default function SocialPage() {
               onMouseLeave={() => setActive(null)}
               onClick={() => window.open(s.url, "_blank")}
             >
-              <figure className="flex flex-col items-center gap-4 select-none">
-                <span className="text-lg md:text-xl font-semibold mb-2">{s.user}</span>
-                {s.icon}
+              <figure className="flex flex-col items-center gap-2 sm:gap-4 select-none w-full">
+                <span className="text-base sm:text-lg md:text-xl font-semibold mb-2 text-center w-full break-words">{s.user}</span>
+                <span className="block text-5xl sm:text-6xl md:text-7xl">{s.icon}</span>
               </figure>
             </motion.article>
           );

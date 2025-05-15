@@ -138,6 +138,14 @@ module.exports = {
 					"0%": { transform: "translateY(20px)", opacity: "0" },
 					"100%": { transform: "translateY(0)", opacity: "1" },
 				},
+				'spin-slow': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' }
+				},
+				'spin-slow-reverse': {
+					'0%': { transform: 'rotate(360deg)' },
+					'100%': { transform: 'rotate(0deg)' }
+				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -150,6 +158,8 @@ module.exports = {
 				'float': 'float 6s ease-in-out infinite',
 				'fade-in': 'fadeIn 0.5s ease-in-out',
 				'slide-up': 'slideUp 0.5s ease-out',
+				'spin-slow': 'spin-slow 8s linear infinite',
+				'spin-slow-reverse': 'spin-slow-reverse 12s linear infinite'
 			}
 		}
 	},
