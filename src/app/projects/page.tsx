@@ -48,12 +48,12 @@ export default function ProjectsPage() {
     <>
       <DecorativeBackground />
       <motion.div
-        className="min-h-screen bg-gradient-to-br from-blue-100 via-blue-50 to-blue-200 flex flex-col items-center py-8 md:py-12 pt-32"
+        className="min-h-screen bg-gradient-to-br from-blue-100 via-blue-50 to-blue-200 dark:from-dark-bg dark:via-dark-bg dark:to-dark-bg flex flex-col items-center py-8 md:py-12 pt-32"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
       >
-        <h1 className="mt-8 text-3xl md:text-5xl font-bold text-black mb-8 md:mb-12 font-poppins text-center">
+        <h1 className="mt-8 text-3xl md:text-5xl font-bold text-black dark:text-dark-text mb-8 md:mb-12 font-poppins text-center">
           Projects and experience
         </h1>
         <section className="flex flex-col lg:flex-row w-full max-w-6xl gap-8 md:gap-12 px-4 md:px-8">
@@ -63,7 +63,7 @@ export default function ProjectsPage() {
               {selected !== null && (
                 <motion.figure
                   layoutId="highlight"
-                  className="absolute left-0 top-0 w-full h-20 rounded-2xl bg-blue-300/80 z-0 shadow-xl"
+                  className="absolute left-0 top-0 w-full h-20 rounded-2xl bg-blue-300/80 dark:bg-blue-700/50 z-0 shadow-xl dark:shadow-blue-900/50"
                   style={{ top: `${selected * 88}px` }}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
@@ -76,23 +76,23 @@ export default function ProjectsPage() {
                   className={`relative flex items-center gap-4 px-4 md:px-6 py-5 rounded-2xl font-medium transition-all duration-200 z-10 text-base md:text-lg w-full
                     ${
                       selected === i
-                        ? "text-blue-900 scale-105"
-                        : "bg-white/70 text-black hover:bg-blue-200 hover:scale-105 shadow-lg"
+                        ? "text-blue-900 dark:text-blue-200 scale-105"
+                        : "bg-white/70 dark:bg-dark-card/70 text-black dark:text-dark-text hover:bg-blue-200 dark:hover:bg-dark-card hover:scale-105 shadow-lg dark:shadow-dark-card/50"
                     }
-                    backdrop-blur-md border border-blue-100`}
+                    backdrop-blur-md border border-blue-100 dark:border-dark-border`}
                   whileHover={{ scale: 1.08 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
                   <article className="flex flex-col items-start">
                     <span className="font-semibold flex items-center gap-2">
-                      {p.name} {selected === i && <FaStar className="text-blue-700" />}
+                      {p.name} {selected === i && <FaStar className="text-blue-700 dark:text-blue-400" />}
                     </span>
                     <ul className="flex flex-wrap gap-1 mt-1">
                       {p.tech.map((t) => (
                         <li
                           key={t}
-                          className="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-semibold shadow-sm border border-blue-200"
+                          className="bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs px-2 py-0.5 rounded-full font-semibold shadow-sm dark:shadow-dark-card/30 border border-blue-200 dark:border-blue-700"
                         >
                           {t}
                         </li>
@@ -107,9 +107,9 @@ export default function ProjectsPage() {
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.4 }}
-                      className="bg-white/90 border border-blue-100 rounded-b-2xl shadow px-4 md:px-6 py-4 text-gray-800 text-sm overflow-hidden"
+                      className="bg-white/90 dark:bg-dark-card/90 border border-blue-100 dark:border-dark-border rounded-b-2xl shadow dark:shadow-dark-card/50 px-4 md:px-6 py-4 text-gray-800 dark:text-gray-300 text-sm overflow-hidden"
                     >
-                      <div className="font-semibold text-blue-900 mb-1">Acerca del proyecto</div>
+                      <div className="font-semibold text-blue-900 dark:text-blue-300 mb-1">Acerca del proyecto</div>
                       <div>{p.description}</div>
                     </motion.div>
                   )}
@@ -131,12 +131,12 @@ export default function ProjectsPage() {
                   transition={{ duration: 0.5 }}
                 >
                   <figure className="relative flex items-center justify-center w-full h-44 md:h-96">
-                    <figure className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-44 md:w-96 h-20 md:h-44 bg-blue-200 rounded-full opacity-60" />
+                    <figure className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-44 md:w-96 h-20 md:h-44 bg-blue-200 dark:bg-blue-700 rounded-full opacity-60" />
                     <svg width="120" height="120" viewBox="0 0 120 120" className="z-10">
-                      <circle cx="60" cy="60" r="60" fill="#111" />
-                      <polygon points="80,60 50,40 50,80" fill="#fff" />
+                      <circle cx="60" cy="60" r="60" fill="#111" className="fill-black dark:fill-white" />
+                      <polygon points="80,60 50,40 50,80" fill="#fff" className="fill-white dark:fill-black" />
                     </svg>
-                    <span className="absolute left-1/2 top-full mt-6 -translate-x-1/2 text-blue-900 text-base md:text-xl font-medium text-center">
+                    <span className="absolute left-1/2 top-full mt-6 -translate-x-1/2 text-blue-900 dark:text-blue-300 text-base md:text-xl font-medium text-center">
                       Click on project for information and preview on Vercel
                     </span>
                   </figure>
@@ -157,7 +157,7 @@ export default function ProjectsPage() {
                     transition={{ delay: 0.2, duration: 0.5 }}
                   >
                     {projects[selected].name === "Cambridge Academy" && (
-                      <div className="w-full flex justify-center max-w-5xl h-48 md:h-[400px] rounded-2xl overflow-auto border-4 border-blue-200 shadow-xl mb-4 bg-[#181a1b]">
+                      <div className="w-full flex justify-center max-w-5xl h-48 md:h-[400px] rounded-2xl overflow-auto border-4 border-blue-200 dark:border-blue-700 shadow-xl dark:shadow-dark-card/50 mb-4 bg-[#181a1b] dark:bg-dark-card">
                         <iframe
                           src="https://cambridgev.vercel.app/"
                           title="Cambridge Academy Live Preview"
@@ -178,7 +178,7 @@ export default function ProjectsPage() {
                       href={projects[selected].vercel}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 md:px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center gap-2 text-base md:text-lg font-semibold transition-all duration-200 border-2 border-white mt-2"
+                      className="px-6 md:px-8 py-3 bg-blue-600 dark:bg-blue-800 hover:bg-blue-700 dark:hover:bg-blue-700 text-white rounded-full shadow-lg dark:shadow-dark-card/50 flex items-center gap-2 text-base md:text-lg font-semibold transition-all duration-200 border-2 border-white dark:border-dark-border mt-2"
                     >
                       <FaExternalLinkAlt className="mr-2" /> Preview on Vercel
                     </a>
@@ -191,4 +191,4 @@ export default function ProjectsPage() {
       </motion.div>
     </>
   );
-}
+} 

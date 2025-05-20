@@ -23,10 +23,10 @@ const socials = [
   {
     name: "GitHub",
     user: "@danrtx",
-    color: "bg-[#181a1b]",
+    color: "bg-[#181a1b] dark:bg-dark-card",
     icon: <FaGithub size={64} className="opacity-90" />,
     url: "https://github.com/danrtx",
-    text: "text-white"
+    text: "text-white dark:text-dark-text"
   },
   {
     name: "Discord",
@@ -67,7 +67,7 @@ const itemVariants = {
 export default function SocialPage() {
   const [active, setActive] = useState<number | null>(null);
   return (
-    <main className="w-screen h-screen flex flex-col sm:flex-row items-stretch justify-stretch bg-blue-50 overflow-hidden">
+    <main className="w-screen h-screen flex flex-col sm:flex-row items-stretch justify-stretch bg-blue-50 dark:bg-dark-bg overflow-hidden">
       <motion.nav
         className="flex w-full h-full flex-col sm:flex-row"
         variants={containerVariants}

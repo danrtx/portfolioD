@@ -1,5 +1,5 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
+	darkMode: 'class',
 	content: [
 		"./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
 		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -63,6 +63,27 @@ module.exports = {
 					discord: '#5865F2',
 				},
 				text: "#222",
+				dark: {
+					bg: '#121212',
+					card: '#1E1E1E',
+					text: '#E1E1E1',
+					primary: '#3B82F6',
+					secondary: '#1E40AF',
+					border: '#2D2D2D',
+					muted: '#4A4A4A',
+					accent: '#60A5FA',
+					'accent-foreground': '#E1E1E1',
+					popover: '#1E1E1E',
+					'popover-foreground': '#E1E1E1',
+					destructive: {
+						DEFAULT: '#EF4444',
+						foreground: '#FFFFFF'
+					},
+					input: '#2D2D2D',
+					ring: '#3B82F6',
+					background: '#121212',
+					foreground: '#E1E1E1'
+				},
 			},
 			borderRadius: {
 				lg: '0.5rem',

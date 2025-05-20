@@ -1,17 +1,15 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
+import { Inter } from 'next/font/google';
+import { ThemeProvider } from '@/context/ThemeContext';
+import ThemeToggle from '@/components/ThemeToggle';
 import Navigation from '@/components/Navigation';
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-poppins',
-});
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Portfolio',
-  description: 'My professional portfolio',
+  title: 'Danilo Montezuma - Portfolio',
+  description: 'Full Stack Developer Portfolio',
 };
 
 export default function RootLayout({
@@ -21,9 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} font-poppins`}>
-        <Navigation />
-        {children}
+      <body className={inter.className}>
+        <ThemeProvider>
+          <Navigation />
+          {children}
+          <ThemeToggle />
+        </ThemeProvider>
       </body>
     </html>
   );
